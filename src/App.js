@@ -4,6 +4,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Box } from '@mui/system';
 import ProfileView from './ProfileView.js';
+import ProjectView from './ProjectView.js';
+import IssueView from './IssueView.js';         
 import HomeView from './HomeView.js';
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -24,7 +26,9 @@ export function App() {
     <BrowserRouter>
        <Routes>
           <Route path="/" element={<HomeView />}/>
-           <Route path="/profile" element={<ProfileView />}/> 
+          <Route path="/profile" element={<ProfileView />}/> 
+          <Route path="/project" element={<ProjectView />}/>
+          <Route path="/issue" element={<IssueView />}/>
         
        </Routes>
      </BrowserRouter> 

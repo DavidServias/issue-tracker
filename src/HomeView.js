@@ -43,6 +43,10 @@ export function HomeView() {
     login();
    
   };
+
+  const handleCreateNewUser = function() {
+    console.log("Create new user");
+  };
  
 /*******************************************************
 **Function Name: login 
@@ -142,6 +146,10 @@ will change depending on the results of login attempt.
           
         </form>
         
+      <Button
+        type="button"
+        onClick={handleCreateNewUser}
+        >CREATE ACCOUNT</Button>
       </Box> 
           
     );
