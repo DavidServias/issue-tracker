@@ -1,9 +1,9 @@
 import React,{useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import CreateAccount from './CreateAccount';
 import { Box } from '@mui/system';
-import ProfilePage from './ProfileView.js';
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { redirect } from "react-router-dom";
 
 /*******************************************************
@@ -26,6 +26,8 @@ export function HomeView() {
     password:""
   });
   const [user, setUser] = useState({});
+  const [formOpen, setFormOpen] = useState(false);
+
   const {username,password} = data;
   const navigate = useNavigate();
   
@@ -46,6 +48,7 @@ export function HomeView() {
 
   const handleCreateNewUser = function() {
     console.log("Create new user");
+    setFormOpen(true);
   };
  
 /*******************************************************
@@ -106,6 +109,7 @@ will change depending on the results of login attempt.
                   margin: 'auto',
                   marginTop: '5ch' 
       }}>
+        <CreateAccount open={formOpen} setFormOpen={setFormOpen}/>
         <h4>Please Login</h4>
         <form className='form'>    
           {/* {loginError ? 
