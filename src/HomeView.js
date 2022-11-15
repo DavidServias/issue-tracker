@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import CreateAccount from './CreateAccount';
 import { Box } from '@mui/system';
 import { useNavigate} from "react-router-dom";
-import { redirect } from "react-router-dom";
 
 /*******************************************************
 **Function Name: 
@@ -33,15 +32,15 @@ export function HomeView() {
   
   console.log(loggedIn);
   // Need to understand this function
+  // https://stackoverflow.com/questions/68826619/spread-operator-in-react-setstate-in-the-usestate-hook
   const changeHandler = e => {
-    setData({...data,[e.target.name]:[e.target.value]});
+    setData({...data, [e.target.name]: [e.target.value] });
   };
-
 
   const submitHandler = e => {
     e.preventDefault();
-    console.log(username);
-    console.log(password);
+    console.log(username[0]);
+    console.log(password[0]);
     login();
    
   };
@@ -74,7 +73,9 @@ will change depending on the results of login attempt.
     });
     let options = {
       method: 'POST',
-      headers: {'Content-Type':'application/json;charset=utf-8'},
+      headers: {
+        'Content-Type':'application/json;charset=utf-8'
+      },
       body: reqBody
     };
     let response = await fetch(url,options)
@@ -101,6 +102,9 @@ will change depending on the results of login attempt.
       
   };
 
+  const openForm = (val = true) => {
+    setFormOpen(val);
+  };
 
   return (
       
@@ -109,7 +113,10 @@ will change depending on the results of login attempt.
                   margin: 'auto',
                   marginTop: '5ch' 
       }}>
-        <CreateAccount open={formOpen} setFormOpen={setFormOpen}/>
+        <CreateAccount 
+          open={formOpen} 
+          openForm={openForm}
+         />
         <h4>Please Login</h4>
         <form className='form'>    
           {/* {loginError ? 

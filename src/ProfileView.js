@@ -9,6 +9,8 @@ export function ProfileView(props) {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const user = location.state.user;
+
   const CreateProjectHandler = function() {
     setFormOpen(true);
     console.log("Create Project");
@@ -18,16 +20,21 @@ export function ProfileView(props) {
     navigate("/", { replace: true });
     
   };
-  const user = location.state.user;
+ 
   return (
     <div>
-      <CreateProject open={formOpen} setFormOpen={setFormOpen} />
+      <CreateProject 
+        open={formOpen} 
+        setFormOpen={setFormOpen}
+        user_id={user._id}
+        user = {user} />
       <p>Hello {user.username}, you are Logged In! </p>
       <h3>Projects You Own</h3>
-      <ul>{location.state.user.projects_owner.map(project=>{
+      <ul>{location.state.user.projects_owner.map(projectSummary=>{
           return(
-            <li key={project.project_id.toString()}>
-            <Link to="/project" state={{user:user, project: project}}>{project.project_title}</Link>
+            <li key={projectSummary.project_id.toString()}>
+            <Link to="/project" state={{user:user, projectId: projectSummary.project_id}}>
+              {projectSummary.project_title}</Link>
           </li>
           );
         })}</ul>  
